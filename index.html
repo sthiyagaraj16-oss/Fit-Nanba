@@ -141,6 +141,58 @@
   }
   .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
 
+  /* MOBILE DOWNLOAD BANNER */
+  .mobile-banner {
+    background: linear-gradient(135deg, rgba(0,255,136,0.08) 0%, rgba(123,97,255,0.08) 100%);
+    border: 1px solid rgba(0,255,136,0.2);
+    border-radius: 16px;
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .mobile-banner-left {
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .mobile-banner-icon {
+    font-size: 2rem;
+  }
+  .mobile-banner-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700; font-size: 0.95rem;
+    margin-bottom: 0.2rem;
+  }
+  .mobile-banner-sub {
+    font-size: 0.78rem; color: var(--muted);
+  }
+  .mobile-btns {
+    display: flex; gap: 0.6rem; flex-wrap: wrap;
+  }
+  .app-btn {
+    display: flex; align-items: center; gap: 0.5rem;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 8px 14px;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 0.82rem; font-weight: 600;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .app-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+  .app-btn .store-icon { font-size: 1.1rem; }
+  .app-btn .store-label { display: flex; flex-direction: column; }
+  .app-btn .store-label small { font-size: 0.65rem; color: var(--muted); font-weight: 400; }
+  .app-btn .store-label span { font-size: 0.82rem; }
+
   /* CARDS GRID */
   .cards-grid {
     display: grid;
@@ -461,6 +513,27 @@
     border-bottom-left-radius: 4px;
   }
   .msg.ai strong { color: var(--accent); }
+
+  /* WEB SEARCH BADGE */
+  .search-badge {
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    background: rgba(0,204,255,0.1);
+    border: 1px solid rgba(0,204,255,0.3);
+    color: #00ccff;
+    font-size: 0.7rem; font-weight: 600;
+    padding: 2px 8px; border-radius: 12px;
+    margin-bottom: 0.5rem;
+  }
+  .search-source {
+    font-size: 0.72rem; color: var(--muted);
+    margin-top: 0.5rem; padding-top: 0.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .search-source a {
+    color: #00ccff; text-decoration: none;
+  }
+  .search-source a:hover { text-decoration: underline; }
+
   .typing {
     display: flex; gap: 4px; align-items: center;
     padding: 0.85rem 1.1rem;
@@ -489,6 +562,39 @@
     flex:1; background: var(--surface);
     border: 1px solid var(--border);
   }
+
+  /* AI TOGGLE BAR */
+  .ai-toggle-bar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.6rem 1.25rem;
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap; gap: 0.5rem;
+  }
+  .toggle-label {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.8rem; color: var(--muted);
+    cursor: pointer; user-select: none;
+  }
+  .toggle-switch {
+    position: relative; width: 38px; height: 20px;
+  }
+  .toggle-switch input { opacity: 0; width: 0; height: 0; }
+  .toggle-slider {
+    position: absolute; cursor: pointer; inset: 0;
+    background: var(--border); border-radius: 20px;
+    transition: 0.3s;
+  }
+  .toggle-slider:before {
+    content: ''; position: absolute;
+    height: 14px; width: 14px;
+    left: 3px; bottom: 3px;
+    background: white; border-radius: 50%;
+    transition: 0.3s;
+  }
+  input:checked + .toggle-slider { background: #00ccff; }
+  input:checked + .toggle-slider:before { transform: translateX(18px); }
+  .toggle-on-text { color: #00ccff; font-weight: 600; }
 
   /* TIPS */
   .tips-grid {
@@ -599,6 +705,7 @@
     main { padding-left: 1rem; padding-right: 1rem; }
     .macro-grid { grid-template-columns: repeat(3,1fr); }
     .hero h1 { font-size: 2rem; }
+    .mobile-banner { flex-direction: column; align-items: flex-start; }
   }
 
   /* FADE IN */
@@ -633,13 +740,11 @@
         <button class="btn-outline" onclick="showSection('ai')">Ask AI Assistant</button>
       </div>
     </div>
-
-    <div class="cards-grid">
+ <div class="cards-grid">
       <div class="feature-card" style="--card-color:#00ff88" onclick="showSection('calc')">
         <div class="card-icon">🧮</div>
         <div class="card-title">Smart Calculators</div>
-        <div class="card-desc">BMI, BMR, TDEE, “Macro split — everything is calculated based on your data.”
-</div>
+        <div class="card-desc">BMI, BMR, TDEE, Macro split — everything is calculated based on your data.</div>
       </div>
       <div class="feature-card" style="--card-color:#ff6b35" onclick="showSection('food')">
         <div class="card-icon">🍽️</div>
@@ -649,7 +754,7 @@
       <div class="feature-card" style="--card-color:#7b61ff" onclick="showSection('workout')">
         <div class="card-icon">💪</div>
         <div class="card-title">Workout Plans</div>
-        <div class="card-desc">“Goal based personalized workout plan — Lose, Gain, Maintain.</div>
+        <div class="card-desc">Goal based personalized workout plan — Lose, Gain, Maintain.</div>
       </div>
       <div class="feature-card" style="--card-color:#00ccff" onclick="showSection('ai')">
         <div class="card-icon">🤖</div>
@@ -664,8 +769,7 @@
       <div class="feature-card" style="--card-color:#ff4466">
         <div class="card-icon">💧</div>
         <div class="card-title">Water Tracker</div>
-        <div class="card-desc">Track your daily hydration goal. 8 glasses = the goal!
-</div>
+        <div class="card-desc">Track your daily hydration goal. 8 glasses = the goal!</div>
       </div>
     </div>
 
@@ -838,7 +942,7 @@
     <div class="daily-log" id="dailyLog">
       <div class="empty">
         <div class="empty-icon">🍽️</div>
-        <div>Food search ,add !</div>
+        <div>Food search, add!</div>
       </div>
     </div>
   </section>
@@ -864,25 +968,43 @@
   <section id="ai" class="section">
     <div class="section-header">
       <h2>AI Health <span>Coach</span></h2>
-      <p>TELL YOUR GOALS — personalized advice </p>
+      <p>TELL YOUR GOALS — personalized advice</p>
     </div>
 
     <div class="ai-chat">
       <div class="chat-header">
         <div class="ai-dot"></div>
-        <div>
+        <div style="flex:1;">
           <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:0.9rem;">Fit Nanba AI</div>
-          <div style="font-size:0.75rem; color:var(--muted);">Powered by Claude</div>
+          <div style="font-size:0.75rem; color:var(--muted);">Powered by Claude + Google Search</div>
         </div>
+        <!-- WEB SEARCH TOGGLE -->
+        <label class="toggle-label" title="Enable Google web search for current info">
+          🔍 <span id="searchToggleLabel">Web Search</span>
+          <div class="toggle-switch">
+            <input type="checkbox" id="webSearchToggle" checked onchange="updateSearchLabel()">
+            <span class="toggle-slider"></span>
+          </div>
+        </label>
       </div>
+
+      <!-- Search mode indicator bar -->
+      <div class="ai-toggle-bar" id="searchModeBar">
+        <span style="font-size:0.78rem; color:#00ccff;">🌐 <strong>Web Search ON</strong> — Search the latest health news and recent research updates.
+</span>
+        <span style="font-size:0.72rem; color:var(--muted);">You can turn it off using the toggle.
+</span>
+      </div>
+
       <div class="chat-messages" id="chatMessages">
         <div class="msg ai">
-          WELCOME! 👋 I'M AI Health Coach. <br><br>
+          WELCOME! 👋 I'M AI Health Coach.<br><br>
           <strong>What can I help you with?</strong><br>
-          • Weight loss plan <br>
-          • Diet advice <br>
-          • Workout tips <br>
-          • Calorie queries 
+          • Weight loss plan<br>
+          • Diet advice<br>
+          • Workout tips<br>
+          • Calorie queries<br>
+          • 🌐 Latest health news (Web Search ON)
         </div>
       </div>
       <div class="chat-input-area">
@@ -896,6 +1018,7 @@
       <button class="btn-outline" onclick="quickAsk('Best Indian foods for muscle gain?')" style="font-size:0.8rem; padding:7px 14px;">Muscle gain diet</button>
       <button class="btn-outline" onclick="quickAsk('How many calories should I eat daily to maintain weight at 70kg?')" style="font-size:0.8rem; padding:7px 14px;">Maintenance calories</button>
       <button class="btn-outline" onclick="quickAsk('Best beginner workout routine for home?')" style="font-size:0.8rem; padding:7px 14px;">Home workout</button>
+      <button class="btn-outline" onclick="quickAsk('What are the latest health and fitness trends in 2025?')" style="font-size:0.8rem; padding:7px 14px;">🌐 Latest trends</button>
     </div>
   </section>
 
@@ -910,8 +1033,7 @@
       <div class="tip-card" style="--tip-color:#00ff88">
         <div class="tip-tag">🥗 Nutrition</div>
         <div class="tip-title">Protein First Rule</div>
-        <div class="tip-text">Eat protein first in every meal. It helps reduce blood sugar spikes and keeps you full for longer.
-Target: body weight ❌ 0.8 g protein per day.</div>
+        <div class="tip-text">Eat protein first in every meal. It helps reduce blood sugar spikes and keeps you full for longer. Target: body weight × 0.8g protein per day.</div>
       </div>
       <div class="tip-card" style="--tip-color:#4488ff">
         <div class="tip-tag">💧 Hydration</div>
@@ -926,7 +1048,7 @@ Target: body weight ❌ 0.8 g protein per day.</div>
       <div class="tip-card" style="--tip-color:#7b61ff">
         <div class="tip-tag">😴 Sleep</div>
         <div class="tip-title">Sleep = Gains</div>
-        <div class="tip-text">If you don,t get 79 hours of sleep, cortisol levels can rise and lead to muscle breakdown. Muscle actually grows during sleep.</div>
+        <div class="tip-text">7-9 hours of sleep is essential. Cortisol levels rise with poor sleep and can lead to muscle breakdown. Muscle actually grows during sleep.</div>
       </div>
       <div class="tip-card" style="--tip-color:#ffb830">
         <div class="tip-tag">⏰ Timing</div>
@@ -941,7 +1063,7 @@ Target: body weight ❌ 0.8 g protein per day.</div>
       <div class="tip-card" style="--tip-color:#00ccff">
         <div class="tip-tag">🇮🇳 Indian Diet</div>
         <div class="tip-title">Best Indian Superfoods</div>
-        <div class="tip-text">Dhal, paneer, curd, eggs, banana, oats, brown rice, and moong are all cheap, nutrient-rich foods. Great for budget-friendly gains.</div>
+        <div class="tip-text">Dal, paneer, curd, eggs, banana, oats, brown rice, and moong are all cheap, nutrient-rich foods. Great for budget-friendly gains.</div>
       </div>
       <div class="tip-card" style="--tip-color:#00ff88">
         <div class="tip-tag">🔥 Fat Loss</div>
@@ -951,8 +1073,7 @@ Target: body weight ❌ 0.8 g protein per day.</div>
       <div class="tip-card" style="--tip-color:#ff6b35">
         <div class="tip-tag">📈 Weight Gain</div>
         <div class="tip-title">Clean Bulk Strategy</div>
-        <div class="tip-text">Stick to a 300-500 kcal surplus. Overeating leads to fat gain.Aim for about 2 g of protein per kg of body weight.Foods like rice, banana, and peanut butter can help.
-</div>
+        <div class="tip-text">Stick to a 300-500 kcal surplus. Overeating leads to fat gain. Aim for about 2g of protein per kg of body weight. Foods like rice, banana, and peanut butter can help.</div>
       </div>
     </div>
   </section>
@@ -980,6 +1101,22 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 2500);
 }
 
+// ==================== WEB SEARCH TOGGLE ====================
+function updateSearchLabel() {
+  const on = document.getElementById('webSearchToggle').checked;
+  const bar = document.getElementById('searchModeBar');
+  const label = document.getElementById('searchToggleLabel');
+  if (on) {
+    bar.style.display = 'flex';
+    label.className = 'toggle-on-text';
+    label.textContent = 'Web Search';
+  } else {
+    bar.style.display = 'none';
+    label.className = '';
+    label.textContent = 'Web Search';
+  }
+}
+
 // ==================== CALCULATORS ====================
 function calculate() {
   const age = parseFloat(document.getElementById('age').value);
@@ -991,7 +1128,6 @@ function calculate() {
 
   if (!age || !height || !weight) { showToast('⚠️ All fields fill பண்ணு!'); return; }
 
-  // BMI
   const bmi = weight / ((height/100) ** 2);
   let bmiCat, bmiColor;
   if (bmi < 18.5) { bmiCat = 'Underweight'; bmiColor = '#4488ff'; }
@@ -999,26 +1135,21 @@ function calculate() {
   else if (bmi < 30) { bmiCat = 'Overweight'; bmiColor = '#ffb830'; }
   else { bmiCat = 'Obese'; bmiColor = '#ff4466'; }
 
-  // BMR (Mifflin-St Jeor)
   let bmr;
   if (gender === 'male') bmr = 10*weight + 6.25*height - 5*age + 5;
   else bmr = 10*weight + 6.25*height - 5*age - 161;
 
-  // TDEE
   const tdee = bmr * activity;
 
-  // Target
   let target, targetLabel;
   if (goal === 'lose') { target = tdee - 500; targetLabel = 'kcal/day (deficit 500)'; }
   else if (goal === 'gain') { target = tdee + 300; targetLabel = 'kcal/day (surplus 300)'; }
   else { target = tdee; targetLabel = 'kcal/day (maintenance)'; }
 
-  // MACROS
   const protein = Math.round(weight * (goal === 'gain' ? 2.2 : 1.8));
   const fat = Math.round(target * 0.25 / 9);
   const carbs = Math.round((target - protein*4 - fat*9) / 4);
 
-  // UPDATE UI
   document.getElementById('bmiVal').textContent = bmi.toFixed(1);
   document.getElementById('bmiCat').textContent = bmiCat;
   document.getElementById('bmrVal').textContent = Math.round(bmr);
@@ -1029,26 +1160,21 @@ function calculate() {
   document.getElementById('carbsG').textContent = Math.max(0,carbs);
   document.getElementById('fatG').textContent = fat;
 
-  // BMI indicator
   const pct = Math.min(100, Math.max(0, (bmi - 10) / 30 * 100));
   document.getElementById('bmiIndicator').style.left = pct + '%';
   document.getElementById('bmiStatus').textContent = bmiCat;
   document.getElementById('bmiStatus').style.color = bmiColor;
 
-  // Timeline
   let timeline = '';
   if (goal === 'lose') {
-    timeline = `📉 500 kcal deficit → ~0.5kg/week loss<br>4 weeks → ~2kg | 8 weeks → ~4kg<br>💡 Tip: “Keep protein high — helps preserve muscle”
-`;
+    timeline = `📉 500 kcal deficit → ~0.5kg/week loss<br>4 weeks → ~2kg | 8 weeks → ~4kg<br>💡 Tip: Keep protein high — helps preserve muscle`;
   } else if (goal === 'gain') {
     timeline = `📈 300 kcal surplus → ~0.3kg/week gain<br>4 weeks → ~1.2kg | 8 weeks → ~2.5kg<br>💡 Tip: Compound exercises + sleep = clean bulk`;
   } else {
-    timeline = `⚖️ TDEE = ${Math.round(tdee)} kcal → weight stable<br>💡 Tip: “If you maintain these calories, your weight will stay the same.”
-`;
+    timeline = `⚖️ TDEE = ${Math.round(tdee)} kcal → weight stable<br>💡 Tip: If you maintain these calories, your weight will stay the same.`;
   }
   document.getElementById('timeline').innerHTML = timeline;
 
-  // Save target for food section
   document.getElementById('foodTarget').textContent = Math.round(target);
   localStorage.setItem('targetCal', Math.round(target));
   updateCalorieBar();
@@ -1059,7 +1185,6 @@ function calculate() {
 
 // ==================== FOOD DATABASE ====================
 const foodDB = [
-  // Indian
   {name:'Idli (1 pc)',cal:39,p:2,c:8,f:0.4,tag:'Indian'},
   {name:'Dosa (1 pc)',cal:120,p:3,c:20,f:3,tag:'Indian'},
   {name:'Sambar (100ml)',cal:55,p:3,c:9,f:1,tag:'Indian'},
@@ -1093,7 +1218,6 @@ const foodDB = [
 ];
 
 let dailyLog = JSON.parse(localStorage.getItem('dailyLog') || '[]');
-let targetCal = parseInt(localStorage.getItem('targetCal') || '2000');
 
 function searchFood(q) {
   const results = document.getElementById('foodResults');
@@ -1221,7 +1345,7 @@ function showWorkout(type, btn) {
 }
 showWorkout('lose', document.querySelector('.goal-btn'));
 
-// ==================== AI CHAT ====================
+// ==================== AI CHAT WITH GOOGLE WEB SEARCH ====================
 const chatHistory = [];
 
 async function sendChat() {
@@ -1232,25 +1356,69 @@ async function sendChat() {
   addMsg(msg, 'user');
   chatHistory.push({role:'user', content: msg});
   showTyping();
+
+  const useWebSearch = document.getElementById('webSearchToggle').checked;
+
   try {
+    const requestBody = {
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 1000,
+      system: `You are Fit Nanba, a friendly health & fitness AI coach. You help with weight loss, weight gain, calorie tracking, workout plans, nutrition, and Indian diet advice. Keep responses concise, practical, and motivating. Use emojis occasionally. When giving diet advice, include Indian food options. Always be encouraging. If web search is used, cite sources briefly.`,
+      messages: chatHistory
+    };
+
+    // Add Google web search tool if enabled
+    if (useWebSearch) {
+      requestBody.tools = [
+        {
+          type: "web_search_20250305",
+          name: "web_search"
+        }
+      ];
+    }
+
     const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:1000,
-        system:`You are Fit Nanba , a friendly health & fitness AI coach. You help with weight loss, weight gain, calorie tracking, workout plans, nutrition, and Indian diet advice. Keep responses concise, practical, and motivating. Use emojis occasionally. When giving diet advice, include Indian food options. Always be encouraging.`,
-        messages: chatHistory
-      })
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(requestBody)
     });
+
     removeTyping();
     const data = await res.json();
-    const reply = data.content?.[0]?.text || "Sorry, “An error occurred.”. Try again!";
-    chatHistory.push({role:'assistant', content:reply});
-    addMsg(reply, 'ai');
+
+    // Extract all text blocks (handles tool_use + text mixed responses)
+    let reply = '';
+    let usedSearch = false;
+    let sources = [];
+
+    if (data.content && Array.isArray(data.content)) {
+      data.content.forEach(block => {
+        if (block.type === 'text') {
+          reply += block.text;
+        } else if (block.type === 'tool_use' && block.name === 'web_search') {
+          usedSearch = true;
+        } else if (block.type === 'tool_result') {
+          // Extract source URLs if present
+          try {
+            const results = JSON.parse(block.content || '[]');
+            if (Array.isArray(results)) {
+              results.slice(0,2).forEach(r => {
+                if (r.url && r.title) sources.push({url: r.url, title: r.title});
+              });
+            }
+          } catch(e) {}
+        }
+      });
+    }
+
+    if (!reply) reply = "Sorry, an error occurred. Try again!";
+
+    chatHistory.push({role: 'assistant', content: reply});
+    addMsg(reply, 'ai', usedSearch, sources);
+
   } catch(e) {
     removeTyping();
-    addMsg("⚠️ Connection issue. Check your internet connection!.", 'ai');
+    addMsg("⚠️ Connection issue. Check your internet connection!", 'ai');
   }
 }
 
@@ -1259,11 +1427,24 @@ function quickAsk(q) {
   sendChat();
 }
 
-function addMsg(text, role) {
+function addMsg(text, role, usedSearch = false, sources = []) {
   const msgs = document.getElementById('chatMessages');
   const div = document.createElement('div');
   div.className = 'msg ' + role;
-  div.innerHTML = text.replace(/\n/g,'<br>');
+
+  let html = text.replace(/\n/g,'<br>');
+
+  if (role === 'ai' && usedSearch) {
+    html = `<div class="search-badge">🌐 Web Search Used</div>` + html;
+  }
+
+  if (sources.length > 0) {
+    html += `<div class="search-source">📎 Sources: ` +
+      sources.map(s => `<a href="${s.url}" target="_blank">${s.title}</a>`).join(' · ') +
+      `</div>`;
+  }
+
+  div.innerHTML = html;
   msgs.appendChild(div);
   msgs.scrollTop = msgs.scrollHeight;
 }
